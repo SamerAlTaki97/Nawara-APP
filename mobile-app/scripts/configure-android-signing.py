@@ -1,3 +1,4 @@
+import re
 from pathlib import Path
 
 
@@ -36,10 +37,15 @@ def main() -> None:
         marker = "android {"
         text = text.replace(marker, marker + "\n" + SIGNING_CONFIG_BLOCK, 1)
 
-    release_marker = "release {"
+    release_marker = "buildTypes {"
     signing_line = "            signingConfig signingConfigs.release"
     if signing_line not in text and release_marker in text:
-        text = text.replace(release_marker, release_marker + "\n" + signing_line, 1)
+        text = re.sub(
+            r"(buildTypes\s*\{\s*release\s*\{)",
+            r"\1\n" + signing_line,
+            text,
+            count=1,
+        )
 
     BUILD_GRADLE.write_text(text, encoding="utf-8")
 
