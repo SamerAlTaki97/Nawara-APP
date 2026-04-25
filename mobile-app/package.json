@@ -1,0 +1,24 @@
+{
+  "name": "wzzzzz-mobile-wrapper",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Mobile wrapper for the Nawara interface under the app name WzZzZ.",
+  "scripts": {
+    "sync:web": "powershell -ExecutionPolicy Bypass -File ./scripts/sync-web-assets.ps1",
+    "generate:icon": "powershell -ExecutionPolicy Bypass -File ./scripts/generate-icon.ps1",
+    "prepare:app": "npm run generate:icon && npm run sync:web",
+    "cap:sync": "npm run prepare:app && npx cap sync",
+    "cap:open:android": "npx cap open android",
+    "cap:open:ios": "npx cap open ios"
+  },
+  "dependencies": {
+    "@capacitor/android": "latest",
+    "@capacitor/app": "latest",
+    "@capacitor/core": "latest",
+    "@capacitor/ios": "latest",
+    "@capacitor-community/sqlite": "latest"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "latest"
+  }
+}
