@@ -28,11 +28,6 @@ jobs:
         working-directory: mobile-app
         run: npm install
 
-      - name: Generate app icon
-        working-directory: mobile-app
-        shell: pwsh
-        run: ./scripts/generate-icon.ps1
-
       - name: Sync mobile web assets
         working-directory: mobile-app
         shell: pwsh
