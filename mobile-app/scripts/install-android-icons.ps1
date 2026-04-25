@@ -13,5 +13,7 @@ if (-not (Test-Path -LiteralPath $targetResDir)) {
   throw "Android platform resources directory not found: $targetResDir"
 }
 
-Copy-Item -LiteralPath (Join-Path $sourceResDir "*") -Destination $targetResDir -Recurse -Force
+Get-ChildItem -LiteralPath $sourceResDir | ForEach-Object {
+  Copy-Item -LiteralPath $_.FullName -Destination $targetResDir -Recurse -Force
+}
 Write-Output "Android launcher icons copied to $targetResDir"
